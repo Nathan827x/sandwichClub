@@ -23,6 +23,14 @@ public class DetailActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+
+//        Just testing the intent here
+//        int numTest = -1;
+//        int test = intent.getIntExtra(EXTRA_POSITION, numTest);
+//        if (test > -1){
+//            Toast.makeText(this, Integer.toString(test), Toast.LENGTH_SHORT).show();
+//        }
+
         if (intent == null) {
             closeOnError();
         }
