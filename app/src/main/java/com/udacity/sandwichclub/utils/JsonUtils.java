@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class JsonUtils {
 
@@ -23,11 +24,18 @@ public class JsonUtils {
             JSONArray alsoKnownAsArray = name.getJSONArray("alsoKnownAs");
             List<String> alsoKnownAs = new ArrayList();
             int mainNameArrayLength = alsoKnownAsArray.length();
-            for (int i = 0; i < mainNameArrayLength; i++){
-                alsoKnownAs.add(alsoKnownAsArray.get(i).toString());
+            if (mainNameArrayLength != 0){
+                for (int i = 0; i < mainNameArrayLength; i++){
+                    alsoKnownAs.add(alsoKnownAsArray.get(i).toString());
+                }
+            } else {
+                alsoKnownAs.add("No other names");
             }
 
             String placeOfOrigin = jsonObject.getString("placeOfOrigin");
+            if (placeOfOrigin.equals("")){
+                placeOfOrigin = "Location was not found";
+            }
 
             String description = jsonObject.getString("description");
 
@@ -36,9 +44,14 @@ public class JsonUtils {
             JSONArray ingredientsArray = jsonObject.getJSONArray("ingredients");
             List<String> ingredients = new ArrayList();
             int ingredientsLength = ingredientsArray.length();
-            for (int i = 0; i < ingredientsLength; i++){
-                ingredients.add(ingredientsArray.get(i).toString());
+            if (ingredientsLength != 0){
+                for (int i = 0; i < ingredientsLength; i++){
+                    ingredients.add(ingredientsArray.get(i).toString());
+                }
+            } else {
+                ingredients.add("Ingredients not present.");
             }
+
 
             Sandwich result = new Sandwich(mainName, alsoKnownAs, placeOfOrigin, description, image, ingredients);
             return result;
